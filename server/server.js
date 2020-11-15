@@ -1,53 +1,28 @@
-
-
-const express = require('express');
-const bodyParser = require('body-parser');
-const port = require('./config/config')
+const express = require("express");
+const bodyParser = require("body-parser");
+const port = require("./config/config");
+const mongoose = require("mongoose");
 const app = express();
-
-
 
 // Middleware body parser
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-// Verbos para crear un CRUD
-app.get('/usuario', (req, res) => {
-    res.json('Get Usuario')
-});
+app.use(require('./routes/usuario'))
 
-app.post('/usuario', (req, res) => {
-    let body = req.body;
+mongoose.connect(process.env.URLDB 
+  ,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  },
+  (err, res) => {
+    if (err) throw err;
+    console.log("Base de datos Online");
+  }
+);
 
-    // Validar con estatus Code.
-    
-    if(body.nombre === undefined) {
-
-        res.status(400).json({
-            ok: false,
-            mensaje: 'Algo salío Mal'
-        })
-    } else {
-        res.json({
-            body
-        })
-    }
-    
-    
-});
-
-// Actualizar usuarios o clientes siempre con ID
-
-app.put('/usuario/:id', (req, res) => {
-    let id = req.params.id
-    res.json({
-        id
-    })
-});
-
-app.delete('/usuario', (req, res) => {
-    res.json('delete Usuario');
-});
-
-app.listen(port)
+app.listen(port);
