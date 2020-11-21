@@ -12,6 +12,20 @@ const port = process.env.PORT || 3000;
 
 // ==============================
 
+// =========================
+
+// Fecha de vencimiento del token
+
+// ==========================
+
+process.env.CADUCIDAD_TOKEN= 60 * 60 * 24 * 30;
+
+// =====================
+// seed DE DESARROLLO
+// =====================
+
+process.env.SEED = process.env.SEED || 'Este-es-el-seed-desarrollo'
+
 
 process.env.NODE_ENV = process.env.NODE_ENV ||'dev'
 
