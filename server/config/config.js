@@ -41,6 +41,13 @@ if(process.env.NODE_ENV === 'dev'){
 
 process.env.URLDB = urlDB;
 
+//====================
+// Google Client ID
+
+// ==================
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '355446441876-dtbnnvusk1j43rs3bg6bfore1bl8iscu.apps.googleusercontent.com'
+
 
 module.exports = {
     port
